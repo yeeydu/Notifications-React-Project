@@ -1,0 +1,110 @@
+import React, { useEffect, useState } from 'react';
+import { Icon, Table, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+export default function Notifications() {
+
+    const [data, setData] = useState([]);
+
+    // API fetch
+    useEffect(() => {
+        const interval = setInterval(() => {
+            //const getData = 
+            axios.get("https://notificationsapi2022.azurewebsites.net/api/notifications")
+            .then((response) => {
+                setData(response.data);
+            }).catch(error => {
+                console.log(error);
+            })
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [setData]);
+
+    // UPDATE ITEM ID
+    const setID = (id) => {
+        //console.log(id)
+        localStorage.setItem("id", id)
+    }
+
+    //DELETE
+    const onDelete = (id) => {
+        axios.delete(`https://notificationsapi2022.azurewebsites.net/api/notifications/${id}`)
+            .then((getData) => {
+                setData(getData.data);
+            })
+        console.log(`item ${id} deleted `)
+    }
+
+    return (
+        <div className='container'>
+            <div className='top'>
+                <div className='list-title'>
+                    <h2>Notifications</h2>
+                </div>
+                <div className='btn-new'>
+                    <Link to="/create">
+                        <Button primary>Create New</Button>
+                    </Link>
+                </div>
+            </div>
+            <Table celled>
+                <Table.Header>
+                    <Table.Row  >
+                        <Table.HeaderCell>Type</Table.HeaderCell>
+                        <Table.HeaderCell>Contact</Table.HeaderCell>
+                        <Table.HeaderCell>Content</Table.HeaderCell>
+                        <Table.HeaderCell>Status</Table.HeaderCell>
+                        <Table.HeaderCell>Action</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body className="list" >
+                    {data.map(notification => (
+                        <Table.Row key={notification.id}>
+                            <Table.Cell>
+                                {notification.type === "SMS" ? <Icon className='mobile' name='mobile' /> : <Icon className='email' name='mail' />}
+                                {notification.type}
+                            </Table.Cell>
+                            <Table.Cell>
+                                {notification.contact}
+                            </Table.Cell>
+                            <Table.Cell>
+                                <Link to={`/update/${notification.id}`}>
+                                    {notification.content}
+                                </Link>
+                            </Table.Cell>
+                            {notification.status === false ?
+                                <Table.Cell negative className="neg-pos-width">
+                                    Waiting...
+                                    <br/>
+                                    <Icon name='attention' />
+                                    Not sent
+                                </Table.Cell> :
+                                <Table.Cell positive className="neg-pos-width">
+                                    <Icon name='checkmark' />
+                                    Sent
+                                </Table.Cell>}
+                            <Table.Cell >
+                                <Link to={`/update/${notification.id}`}>
+                                    <Button
+                                        basic color='blue'
+                                        content='Update'
+                                        onClick={() => setID(notification.id)} >
+                                        <Icon name='edit outline' />Update
+                                    </Button>
+                                </Link>
+                                <Button
+                                    basic color='red'
+                                    content='Delete'
+                                    onClick={() => onDelete(notification.id)}
+                                >
+                                    <Icon name='delete' />Delete
+                                </Button>
+                            </Table.Cell>
+                        </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table>
+        </div>
+    )
+}
