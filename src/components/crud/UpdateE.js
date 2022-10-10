@@ -158,7 +158,7 @@ export default function UpdateE() {
             ></textarea>
             <p>{errors.content?.message}</p>
             <br />
-            <button type="submit" >Send</button>
+            <button type="submit" >Update</button>
           </form>
         </div>
       </div>
