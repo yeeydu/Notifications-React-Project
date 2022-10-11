@@ -154,6 +154,13 @@ code {
   margin: 20px;
 }
 
+/* Validations Errors  */
+.val-errors{
+  font-size: 12px;
+  color: red;
+}
+
+
 /*--------------------------*/
 
 .optionStyle {

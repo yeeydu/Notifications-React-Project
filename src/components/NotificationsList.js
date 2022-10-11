@@ -73,7 +73,7 @@ export default function Notifications() {
                 </Table.Header>
                 <Table.Body className="list" >
                     {isLoading ? (
-                        <Table.Row>
+                        <Table.Row  positive textAlign='center'>
                             <Table.Cell><h2>Loading...</h2></Table.Cell>
                         </Table.Row>
                     ) : (
@@ -85,6 +85,7 @@ export default function Notifications() {
                             } else if (notification.content.toLowerCase().includes(query.toLowerCase())) {
                                 return notification;
                             }
+                            return false;
                         }).map(notification => (  // LIST ALL
                             <Table.Row key={notification.id}>
                                 <Table.Cell>

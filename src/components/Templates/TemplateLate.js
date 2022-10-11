@@ -92,7 +92,7 @@ export default function TemplateBirthday() {
                 <option className='option' value="Email">Email</option>
               </select>
             </label>
-            <p>{errors.type?.message}</p>
+            <p className='val-errors'>{errors.type?.message}</p>
             <br />
             {/*    { type === "SMS" ? <Phone/> : <Mail/> } / */}
             <br />
@@ -107,7 +107,7 @@ export default function TemplateBirthday() {
                   placeholder='Phone contact'
                   onChange={(e) => { setContact(e.target.value) }}
                 />
-                <p>{errors.contact?.message}</p>
+                <p className='val-errors'>{errors.contact?.message}</p>
               </>
             )}
             {type === "Email" && (
@@ -121,7 +121,7 @@ export default function TemplateBirthday() {
                   placeholder='Email contact'
                   onChange={(e) => { setContact(e.target.value) }}
                 />
-                <p>{errors.contact?.message}</p>
+                <p className='val-errors'>{errors.contact?.message}</p>
               </>
             )}
             <br />
@@ -136,7 +136,7 @@ export default function TemplateBirthday() {
               placeholder='Send notification about...'
               onChange={(e) => { setContent(e.target.value) }}
             ></textarea>
-            <p>{errors.content?.message}</p>
+            <p className='val-errors'>{errors.content?.message}</p>
             <br />
             <button type="submit" >Send</button>
           </form>
