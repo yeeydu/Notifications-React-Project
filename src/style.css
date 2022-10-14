@@ -51,6 +51,8 @@ code {
   display: flex;
   align-self:baseline;
 }
+
+/*  SEARCH BAR  */
 @media only screen and (min-width: 600px) {
 .search{
   display: flex;
@@ -107,7 +109,7 @@ code {
     transition: color .1s ease, border-color .1s ease;
   }
 }
-
+/* BTN NEW */
 .btn-new {
   display: flex;
   justify-content: flex-end;

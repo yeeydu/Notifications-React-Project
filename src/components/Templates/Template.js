@@ -11,7 +11,7 @@ export default function Template(props) {
 
   const [type, setType] = useState("");
   const [contact, setContact] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(props.content);
   // const [status, setStatus] = useState();
 
 
@@ -131,7 +131,7 @@ export default function Template(props) {
             <br />
             <textarea
               type="text"
-              value={props.content}
+              value={content}
               {...register("content", { required: true })} //
               placeholder='Send notification about...'
               onChange={(e) => { setContent(e.target.value) }}

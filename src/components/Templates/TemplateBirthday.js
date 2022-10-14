@@ -7,7 +7,7 @@ import * as yup from "yup";
 import 'yup-phone';
 
 
-export default function TemplateBirthday() {
+export default function TemplateBirthday(props) {
 
   const [type, setType] = useState("");
   const [contact, setContact] = useState("");
