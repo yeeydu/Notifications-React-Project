@@ -12,17 +12,19 @@ export default function Notifications() {
 
     // API fetch
     useEffect(() => {
-        const interval = setInterval(() => {
-            //const getData = 
+        const getData =  () => {
             axios.get("https://notificationsapi2022.azurewebsites.net/api/notifications")
-                .then((response) => {
-                    setData(response.data);
-                    setIsLoading(false);
-                }).catch(error => {
-                    console.log(error);
-                    setIsLoading(true);
-                })
-        }, 1000);
+            .then((response) => {
+                setData(response.data.reverse()); // Show new records on top
+                setIsLoading(false);
+            }).catch(error => {
+                console.log(error);
+                setIsLoading(true);
+            })
+        }
+        const interval = setInterval(() => {
+             getData();
+        }, 2000);
         return () => clearInterval(interval);
     }, [setData]);
 
