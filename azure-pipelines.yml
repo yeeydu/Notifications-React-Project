@@ -27,6 +27,12 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'echo $(Build.BinariesDirectory)'
+    
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
