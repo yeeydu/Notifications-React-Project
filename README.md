@@ -8,6 +8,17 @@ In the project directory, you can run:
 
 ### `npm start`
 
+
+If an Error like this: Error message "error:0308010C:digital envelope routines::unsupported"
+
+---
+In your package.json: change this line
+
+"start": "react-scripts start"
+to
+"start": "react-scripts --openssl-legacy-provider start"
+
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
